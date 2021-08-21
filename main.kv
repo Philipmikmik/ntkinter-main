@@ -1,4 +1,4 @@
-<MyLayout>
+MyLayout>
     FloatLayout:
         size: (root.width, root.height)
         orientation: 'vertical'
@@ -11,6 +11,10 @@
         Label:
             id: title
             pos_hint: {'center_x': .5, 'center_y': .95}
+            size_hint_y: None
+            text_size: self.width, None
+            halign: 'center'
+            height: self.texture_size[1]
         Label:
             id: author
             pos_hint: {'center_x': .5, 'center_y': .91}
@@ -42,6 +46,18 @@
             on_press:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'screen_two'
+        Button:
+            text: "Favorites"
+            size_hint: (.18, .06)
+            pos_hint: {'center_x': .87, 'center_y': .13}
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'favorites'
+        Button:
+            text: "Favorite"
+            id: fave
+            size_hint: (.18, .06)
+            pos_hint: {'center_x': .14, 'center_y': .13}
 <Settings>:
     FloatLayout:
         Button:
@@ -51,9 +67,9 @@
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'screen_one'
-                root.prit()
         LinkEditor:
             id: inputEX
+            keyboard_suggestions: False
             in_ex: 'exclusions'
             size_hint: (.7, .2)
             pos_hint: {'center_x': .5, 'center_y': .65}
@@ -62,9 +78,24 @@
             pos_hint: {'center_x': .5, 'center_y': .77}
         LinkEditor:
             id: inputIN
+            keyboard_suggestions: False
             in_ex: 'inclusions'
             size_hint: (.7, .2)
             pos_hint: {'center_x': .5, 'center_y': .35}
         Label:
             text: "Inclusions"
             pos_hint: {'center_x': .5, 'center_y': .47}
+<Favorites>
+    FloatLayout:
+        Button:
+            text: "Random"
+            size_hint: (.18, .06)
+            pos_hint: {'center_x': .87, 'center_y': .05}
+            on_press: root.bruh()
+        Button:
+            size_hint: (.18, .06)
+            pos_hint: {'center_x': .14, 'center_y': .92}
+            text: "Back"
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'screen_one'
