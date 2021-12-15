@@ -1,4 +1,5 @@
-MyLayout>
+<MyLayout>
+
     FloatLayout:
         size: (root.width, root.height)
         orientation: 'vertical'
@@ -6,67 +7,106 @@ MyLayout>
             id: my_carousel
             on_touch_up: root.pages()
             direction: 'right'
-            pos_hint: {'center_x': .5, 'center_y': .45}
-            size_hint: .9, .9
+            pos_hint: {'center_x': .5, 'center_y': .46}
+            size_hint: .8, .8
         Label:
             id: title
-            pos_hint: {'center_x': .5, 'center_y': .95}
+            text: " "
             size_hint_y: None
             text_size: self.width, None
             halign: 'center'
             height: self.texture_size[1]
+            pos_hint: {'center_x': .5, 'center_y': .96}
+            canvas.before:
+                Color:
+                    rgba: (.27, .27, .27, 1)
+                RoundedRectangle:
+                    size: [350, 30]
+                    pos: (root.width-350)/2, self.pos[1]-6
         Label:
             id: author
-            pos_hint: {'center_x': .5, 'center_y': .91}
+            pos_hint: {'center_x': .5, 'center_y': .92}
         Label:
             id: tags
             halign: 'center'
             size_hint_y: None
             text_size: self.width, None
             height: self.texture_size[1]
-            pos_hint: {'center_x': .5, 'center_y': .86}
+            pos_hint: {'center_x': .5, 'center_y': .87}
         Label:
             id: pages
-            pos_hint: {'center_x': .5, 'center_y': .05}
+            pos_hint: {'center_x': .5, 'center_y': .11}
         Button:
-            text: "Random"
-            size_hint: (.18, .06)
-            pos_hint: {'center_x': .87, 'center_y': .05}
+            pos_hint: {'center_x': .89, 'center_y': .04}
             on_press: root.press()
+            size_hint: (.06, .06)
+            background_color: .19, .19, .19, 0
+            Image:
+                source: 'icons/random.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
         Button:
-            text: "Copy link"
             id: clip
-            size_hint: (.18, .06)
-            pos_hint: {'center_x': .14, 'center_y': .05}
+            pos_hint: {'center_x': .1, 'center_y': .04}
             on_press: root.copy()
+            size_hint: (.06, .06)
+            background_color: .19, .19, .19, 0
+            Image:
+                source: 'icons/clipboard.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
         Button:
-            text: "Settings"
-            size_hint: (.18, .06)
-            pos_hint: {'center_x': .68, 'center_y': .05}
+            pos_hint: {'center_x': .89, 'center_y': .96}
             on_press:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'screen_two'
+            size_hint: (.06, .06)
+            background_color: .19, .19, .19, 0
+            Image:
+                source: 'icons/settings.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
         Button:
-            text: "Favorites"
-            size_hint: (.18, .06)
-            pos_hint: {'center_x': .87, 'center_y': .13}
+            pos_hint: {'center_x': .1, 'center_y': .96}
             on_press:
-                root.manager.transition.direction = 'left'
+                root.prnt_fvs()
+                root.manager.transition.direction = 'right'
                 root.manager.current = 'favorites'
+            size_hint: (.06, .06)
+            background_color: .19, .19, .19, 0
+            Image:
+                source: 'icons/favourites.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
         Button:
-            text: "Favorite"
             id: fave
-            size_hint: (.18, .06)
-            pos_hint: {'center_x': .14, 'center_y': .13}
+            on_press: root.faves()
+            pos_hint: {'center_x': .1, 'center_y': .11}
+            size_hint: (.06, .06)
+            background_color: .19, .19, .19, 0
+            Image:
+                source: 'icons/like.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 <Settings>:
+    canvas.before:
+        Color:
+            rgba: (.19, .19, .19, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
     FloatLayout:
         Button:
-            size_hint: (.18, .06)
             pos_hint: {'center_x': .14, 'center_y': .92}
-            text: "Back"
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'screen_one'
+            size_hint: (.06, .06)
+            background_color: .19, .19, .19, 0
+            Image:
+                source: 'icons/back.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
         LinkEditor:
             id: inputEX
             keyboard_suggestions: False
@@ -86,16 +126,49 @@ MyLayout>
             text: "Inclusions"
             pos_hint: {'center_x': .5, 'center_y': .47}
 <Favorites>
+    canvas.before:
+        Color:
+            rgba: (.19, .19, .19, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
     FloatLayout:
+        size: (root.width, root.height)
+        orientation: 'vertical'
         Button:
             text: "Random"
             size_hint: (.18, .06)
             pos_hint: {'center_x': .87, 'center_y': .05}
-            on_press: root.bruh()
+            on_press: root.funcse()
         Button:
-            size_hint: (.18, .06)
             pos_hint: {'center_x': .14, 'center_y': .92}
-            text: "Back"
             on_press:
-                root.manager.transition.direction = 'right'
+                root.manager.transition.direction = 'left'
                 root.manager.current = 'screen_one'
+            size_hint: (.06, .06)
+            background_color: .19, .19, .19, 0
+            Image:
+                source: 'icons/back.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+        Label:
+            id: title1
+            pos_hint: {'center_x': .3, 'center_y': .81}
+            size_hint_y: None
+            text_size: self.width, None
+            halign: 'center'
+            height: self.texture_size[1]
+        Label:
+            id: title2
+            pos_hint: {'center_x': .7, 'center_y': .81}
+            size_hint_y: None
+            text_size: self.width, None
+            halign: 'center'
+            height: self.texture_size[1]
+        Label:
+            id: title3
+            pos_hint: {'center_x': .3, 'center_y': .41}
+            size_hint_y: None
+            text_size: self.width, None
+            halign: 'center'
+            height: self.texture_size[1]
